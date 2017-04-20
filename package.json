@@ -1,0 +1,17 @@
+{
+  "name": "imagestreamingapp",
+  "version": "1.0.0",
+  "description": "node.js app built with the help of codeschool",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tate Rathje <flint285@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axon": "^2.0.3",
+    "express": "3.5.1",
+    "redis": "^2.7.1",
+    "underscore": "^1.8.3"
+  }
+}
