@@ -8,8 +8,21 @@ exports.save = function () {
 	model.save(badges, function (err) {
 		if (err) return res.json(503, { error: true});
 		next();
+		model.trim();
 	});
 };
+
+/**
+ * Trim down the redis list
+ */
+
+exports.trim = function () {
+	redis.ltrim('badges', 0, 9);
+}
+
+
+
+
 
 exports.send = function () {
 	// body...
