@@ -13,17 +13,12 @@ exports.save = function () {
 };
 
 /**
- * Trim down the redis list
+ * Send badges to pub/sub socket in model
  */
-
-exports.trim = function () {
-	redis.ltrim('badges', 0, 9);
-}
-
-
-
-
-
-exports.send = function () {
-	// body...
+exports.send = function (req, res, next) {
+	var badges = _.clone(req.body);
+	model.send(badges, function (err) {
+		if (err) return res.json(503, { error: true});
+		res.json(200, { error: null });
+	});
 };
