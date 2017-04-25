@@ -22,3 +22,14 @@ exports.send = function (req, res, next) {
 		res.json(200, { error: null });
 	});
 };
+
+/**
+ * Get 10 badges from model
+ */
+exports.get = function (res, req) {
+	model.get(function (err, data) {
+		if (err) return res.json(503, { error: true});
+		res.json(200, data);
+	});
+};
+
