@@ -16,7 +16,9 @@ exports.save = function (badges, callback) {
  * Trim down the redis list
  */
 exports.trim = function () {
-	redis.ltrim('badges', 0, 9);
+	redis.ltrim('badges', 0, 9, function (err) {
+		if (err) throw err;
+	});
 };
 
 /**

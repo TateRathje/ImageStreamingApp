@@ -1,35 +1,46 @@
 'use strict';
 
+var badges = require('../models/badges');
 var _ = require('underscore');
-var model = require('../models/badges');
 
+/**
+ * Save our badges
+ */
 exports.save = function (req, res, next) {
-	var badges = _.clone(req.body);
-	model.save(badges, function (err) {
-		if (err) return res.json(503, { error: true});
+	var badgeList = _.clone(req.body);
+	badges.save(badgeList, function (err, data) {
+		if (err) return res.json(503, err);
 		next();
-		model.trim();
 	});
 };
 
 /**
- * Send badges to pub/sub socket in model
+ * Trim the badges
+ */
+exports.trim = function (req, res, next) {
+	badges.trim();
+	next();
+};
+
+/**
+ * Send our badges
  */
 exports.send = function (req, res, next) {
-	var badges = _.clone(req.body);
-	model.send(badges, function (err) {
-		if (err) return res.json(503, { error: true});
-		res.json(200, { error: null });
-	});
+	var badgeList = _.clone(req.body);
+	badges.send(badgeList);
+	res.send(200, 'success');	
 };
 
 /**
  * Get 10 badges from model
  */
-exports.get = function (req, res) {
-	model.get(function (err, data) {
-		if (err) return res.json(503, { error: true});
-		res.json(200, data);
+exports.get = function (req, res, next) {
+	badges.get(function (err, data) {
+		res.json(err ? 503 : 200, {
+			error: err ? true : null,
+			errorMessage: err ? err : null,
+			data: data
+		});
 	});
 };
 
