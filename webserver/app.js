@@ -5,7 +5,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
-var subSocket = require('./lib/subscribe.js');
+var subSocket = require('./lib/subscribe');
 var badges = require('./models/badges');
 
 server.listen(3000, function () {

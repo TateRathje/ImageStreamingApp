@@ -4,7 +4,7 @@
   "description": "node.js app built with the help of codeschool",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --inspect ./webserver/app.js"
   },
   "author": "Tate Rathje <flint285@gmail.com>",
   "license": "MIT",
